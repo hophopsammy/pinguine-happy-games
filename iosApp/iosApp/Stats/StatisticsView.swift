@@ -140,7 +140,7 @@ struct HistoryView: View {
         .confirmationDialog("Delete this game?", isPresented: deleteDialogPresented, titleVisibility: .visible, presenting: gameToDelete) { row in
             Button("Delete game", role: .destructive) { model.dispatch(Actions.shared.deleteGame(gameId: row.gameId)) }
         } message: { _ in
-            Text("The game is removed from all your devices and doesn't count for the statistics.")
+            Text("The game is removed and no longer counts for the statistics.")
         }
     }
 

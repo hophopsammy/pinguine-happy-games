@@ -4,7 +4,6 @@ import com.pinguine.spiele.model.Game
 import com.pinguine.spiele.model.GameType
 import com.pinguine.spiele.model.Player
 import com.pinguine.spiele.persistence.SavedData
-import com.pinguine.spiele.sync.CloudWarning
 import com.pinguine.spiele.sync.ImportError
 
 enum class LoadStatus { LOADING, READY, FAILED }
@@ -30,11 +29,7 @@ data class RoundEntryDraft(
     val tricks: Map<String, Int> = emptyMap(),
 )
 
-/**
- * The whole app state. [players], [games] and the deletion markers are the stored data; the rest is UI
- * flow state. [localRevision] increases whenever the data changes because of something done on this
- * device (including a dump import), which is what the iCloud sync uploads.
- */
+/** The whole app state. [players], [games] and the deletion markers are the stored data; the rest is UI flow state. */
 data class AppState(
     val loadStatus: LoadStatus = LoadStatus.LOADING,
     val loadError: String? = null,
@@ -42,14 +37,11 @@ data class AppState(
     val games: List<Game> = emptyList(),
     val deletedGames: Map<String, Long> = emptyMap(),
     val deletedPlayers: Map<String, Long> = emptyMap(),
-    val localRevision: Long = 0,
     val newGame: NewGameDraft? = null,
     val roundEntry: RoundEntryDraft? = null,
     val pendingImport: SavedData? = null,
     val importError: ImportError? = null,
-    val cloudWarning: CloudWarning? = null,
     val persistError: String? = null,
-    internal val pendingCloudSnapshots: List<SavedData> = emptyList(),
 )
 
 internal fun AppState.toSavedData(exportedAt: Long? = null) = SavedData(

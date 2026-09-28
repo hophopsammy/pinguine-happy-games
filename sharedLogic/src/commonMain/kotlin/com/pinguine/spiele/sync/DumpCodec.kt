@@ -18,7 +18,7 @@ internal sealed interface DecodeResult {
     data class Failure(val error: ImportError) : DecodeResult
 }
 
-/** Reads and writes `.pinguine` dumps and iCloud snapshots, rejecting anything that isn't safe to merge. */
+/** Reads and writes `.pinguine` dumps, rejecting anything that isn't safe to merge. */
 internal object DumpCodec {
     fun encode(data: SavedData): String = AppJson.encodeToString(SavedData.serializer(), data)
 

@@ -4,7 +4,6 @@ import SharedLogic
 struct HomeView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
-    @Environment(CloudSyncService.self) private var cloud
     @State private var gameToDelete: GameSummary?
 
     var body: some View {
@@ -56,13 +55,13 @@ struct HomeView: View {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button { router.path.append(.players) } label: { Label("Players", systemImage: "person.2") }
                 Button { router.path.append(.statistics) } label: { Label("Statistics", systemImage: "chart.bar.xaxis") }
-                Button { router.path.append(.sync) } label: { Label("Sync", systemImage: cloud.toolbarSymbol) }
+                Button { router.path.append(.sync) } label: { Label("Sync", systemImage: "arrow.triangle.2.circlepath") }
             }
         }
         .confirmationDialog("Delete this game?", isPresented: deleteDialogPresented, titleVisibility: .visible, presenting: gameToDelete) { game in
             Button("Delete game", role: .destructive) { model.dispatch(Actions.shared.deleteGame(gameId: game.gameId)) }
         } message: { _ in
-            Text("The game is removed from all your devices and doesn't count for the statistics.")
+            Text("The game is removed and no longer counts for the statistics.")
         }
     }
 

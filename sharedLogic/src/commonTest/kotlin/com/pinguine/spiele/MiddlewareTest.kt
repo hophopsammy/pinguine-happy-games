@@ -6,8 +6,6 @@ import com.pinguine.spiele.persistence.SavedData
 import com.pinguine.spiele.redux.Actions
 import com.pinguine.spiele.redux.AppStore
 import com.pinguine.spiele.redux.LoadStatus
-import com.pinguine.spiele.sync.CloudSnapshotDecoder
-import com.pinguine.spiele.sync.CloudWarning
 import com.pinguine.spiele.sync.DumpCodec
 import com.pinguine.spiele.sync.ImportError
 import kotlinx.coroutines.CompletableDeferred
@@ -130,22 +128,6 @@ class MiddlewareTest {
         assertNotNull(store.state.pendingImport)
         store.dispatch(Actions.confirmImport())
         assertEquals(listOf("ben"), store.state.players.map { it.id })
-    }
-
-    @Test
-    fun cloudSnapshotsAreMergedAndSavedWithoutCountingAsLocalChanges() = runTest {
-        val repository = InMemoryGameRepository(data(players = listOf(player("Anna"))))
-        val store = store(repository)
-        advanceUntilIdle()
-        val newer = """{"schemaVersion":99}"""
-        val batch = CloudSnapshotDecoder.decode(listOf(DumpCodec.encode(data(players = listOf(player("Ben")))), newer))
-        store.dispatch(Actions.applyCloudSnapshots(batch))
-        // The merge is done when dispatch returns, so iCloud can upload right after it.
-        assertEquals(listOf("anna", "ben"), store.state.players.map { it.id })
-        advanceUntilIdle()
-        assertEquals(0, store.state.localRevision)
-        assertEquals(CloudWarning.NEWER_SCHEMA_ON_OTHER_DEVICE, store.state.cloudWarning)
-        assertEquals(listOf("anna", "ben"), repository.data!!.players.map { it.id })
     }
 
     @Test

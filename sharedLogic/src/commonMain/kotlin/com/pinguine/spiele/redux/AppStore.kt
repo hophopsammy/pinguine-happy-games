@@ -55,7 +55,7 @@ class AppStore internal constructor(
 
     /**
      * Writes the stored data to a new file named [fileName] and returns its path. Used for the
-     * `.pinguine` export and the iCloud upload; safe to call from any thread.
+     * `.pinguine` export; safe to call from any thread.
      */
     fun writeSnapshotFile(fileName: String): String {
         val root = checkNotNull(snapshotDirectory) { "No snapshot directory configured" }
@@ -81,7 +81,7 @@ class AppStore internal constructor(
     }
 
     internal companion object {
-        // Keep files long enough for a share sheet or an iCloud upload to finish reading them.
+        // Keep files long enough for the share sheet to finish reading them.
         private const val SNAPSHOT_RETENTION_MILLIS = 24L * 60 * 60 * 1000
 
         fun create(
@@ -99,7 +99,7 @@ class AppStore internal constructor(
                 notificationContext = notificationContext,
                 enhancer = applyMiddleware(
                     persistenceMiddleware(repository, effectScope, ioDispatcher),
-                    syncMiddleware(effectScope, decodeDispatcher),
+                    importMiddleware(effectScope, decodeDispatcher),
                 ),
             )
             return AppStore(store, snapshotDirectory).also { it.dispatch(AppAction.LoadRequested) }

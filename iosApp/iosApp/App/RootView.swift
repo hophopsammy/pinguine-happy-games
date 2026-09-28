@@ -4,7 +4,6 @@ import SharedLogic
 struct RootView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
-    @Environment(CloudSyncService.self) private var cloud
 
     var body: some View {
         @Bindable var router = router
@@ -35,12 +34,6 @@ struct RootView: View {
             Button("OK") { model.dispatch(Actions.shared.dismissErrors()) }
         } message: {
             Text("Your last change may not be saved. Try again or free up some storage.")
-        }
-        .onChange(of: model.state.loadStatus == .ready, initial: true) { _, isReady in
-            if isReady { cloud.dataLoaded() }
-        }
-        .onChange(of: model.state.localRevision) { _, _ in
-            cloud.localDataChanged()
         }
     }
 
@@ -88,7 +81,6 @@ struct RootView: View {
 
 private struct LoadFailedView: View {
     @Environment(AppModel.self) private var model
-    @Environment(CloudSyncService.self) private var cloud
     @State private var confirmStartFresh = false
 
     var body: some View {
@@ -102,20 +94,15 @@ private struct LoadFailedView: View {
             Button("Start fresh", role: .destructive) { confirmStartFresh = true }
         }
         .confirmationDialog("Start with empty data?", isPresented: $confirmStartFresh, titleVisibility: .visible) {
-            Button("Start fresh", role: .destructive) {
-                cloud.resetForFreshStart()
-                model.dispatch(Actions.shared.startFresh())
-            }
+            Button("Start fresh", role: .destructive) { model.dispatch(Actions.shared.startFresh()) }
         } message: {
-            Text("The unreadable file is kept on the device. You can bring your games back from iCloud or a backup file.")
+            Text("The unreadable file is kept on the device. You can bring your games back by importing a backup file.")
         }
     }
 }
 
 #Preview {
-    let model = AppModel.preview()
     RootView()
-        .environment(model)
+        .environment(AppModel.preview())
         .environment(Router())
-        .environment(CloudSyncService(model: model, containerIdentifier: nil))
 }

@@ -26,7 +26,7 @@ data class MergeReport(
 internal data class MergeResult(val data: SavedData, val report: MergeReport)
 
 /**
- * Merges data from another device (a dump or an iCloud snapshot) into the local data.
+ * Merges data from another device (a `.pinguine` dump) into the local data.
  *
  * - Players are the same person when their usernames or aliases overlap. The merged player keeps the
  *   username of the most recently updated record that no other record lists as a former name, so renames

@@ -529,24 +529,24 @@
         }
       }
     },
-    "All games of %@ will belong to %@. This also applies on your other devices.": {
+    "All games of %@ will belong to %@.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alle Spiele von %@ gehören dann %@. Das gilt auch auf deinen anderen Geräten."
+            "value": "Alle Spiele von %@ gehören dann %@."
           }
         },
         "en": {
           "stringUnit": {
             "state": "new",
-            "value": "All games of %1$@ will belong to %2$@. This also applies on your other devices."
+            "value": "All games of %1$@ will belong to %2$@."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todas las partidas de %@ pasarán a %@. También en tus otros dispositivos."
+            "value": "Todas las partidas de %@ pasarán a %@."
           }
         }
       }
@@ -563,22 +563,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todas las estadísticas"
-          }
-        }
-      }
-    },
-    "Another device uses a newer version of the app. Update the app on all devices to sync everything.": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein anderes Gerät nutzt eine neuere App-Version. Aktualisiere die App auf allen Geräten, damit alles synchronisiert wird."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Otro dispositivo usa una versión más nueva de la app. Actualiza la app en todos los dispositivos para sincronizarlo todo."
           }
         }
       }
@@ -627,22 +611,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Los jugadores archivados conservan sus estadísticas, pero no se pueden elegir para partidas nuevas."
-          }
-        }
-      }
-    },
-    "Backup file": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sicherungsdatei"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archivo de copia"
           }
         }
       }
@@ -869,22 +837,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se pudieron guardar tus datos"
-          }
-        }
-      }
-    },
-    "Data from one of your devices couldn't be read.": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Daten eines deiner Geräte konnten nicht gelesen werden."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se pudieron leer los datos de uno de tus dispositivos."
           }
         }
       }
@@ -1353,22 +1305,6 @@
         }
       }
     },
-    "Keeps games, players and statistics up to date on every device signed in with your Apple ID.": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hält Spiele, Spieler und Statistik auf allen Geräten mit deiner Apple-ID aktuell."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mantiene partidas, jugadores y estadísticas al día en todos los dispositivos con tu Apple ID."
-          }
-        }
-      }
-    },
     "Leaderboard": {
       "localizations": {
         "de": {
@@ -1653,22 +1589,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "OK"
-          }
-        }
-      }
-    },
-    "Off": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aus"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desactivado"
           }
         }
       }
@@ -2079,22 +1999,6 @@
         }
       }
     },
-    "Send a .pinguine file with AirDrop or save it to Files, for example to share games with someone else's device. Importing adds its games to yours; players are matched by username.": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sende eine .pinguine-Datei per AirDrop oder sichere sie in „Dateien“, zum Beispiel um Spiele mit dem Gerät einer anderen Person zu teilen. Beim Importieren kommen die Spiele zu deinen dazu; Spieler werden über den Benutzernamen erkannt."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Envía un archivo .pinguine por AirDrop o guárdalo en Archivos, por ejemplo para compartir partidas con el dispositivo de otra persona. Al importarlo, sus partidas se suman a las tuyas; los jugadores se reconocen por su nombre de usuario."
-          }
-        }
-      }
-    },
     "Show results": {
       "localizations": {
         "de": {
@@ -2107,22 +2011,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ver resultados"
-          }
-        }
-      }
-    },
-    "Sign in to iCloud in Settings to sync.": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Melde dich in den Einstellungen bei iCloud an, um zu synchronisieren."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Inicia sesión en iCloud en Ajustes para sincronizar."
           }
         }
       }
@@ -2223,70 +2111,6 @@
         }
       }
     },
-    "Sync failed. It will try again later.": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Synchronisierung fehlgeschlagen. Es wird später erneut versucht."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La sincronización falló. Se volverá a intentar más tarde."
-          }
-        }
-      }
-    },
-    "Sync now": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jetzt synchronisieren"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sincronizar ahora"
-          }
-        }
-      }
-    },
-    "Sync with iCloud": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit iCloud synchronisieren"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sincronizar con iCloud"
-          }
-        }
-      }
-    },
-    "Syncing…": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Synchronisiert…"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sincronizando…"
-          }
-        }
-      }
-    },
     "Tap the flag of the player who ended the round. Their points are doubled if they are positive and someone else has the same or fewer.": {
       "localizations": {
         "de": {
@@ -2351,18 +2175,18 @@
         }
       }
     },
-    "The game is removed from all your devices and doesn't count for the statistics.": {
+    "The game is removed and no longer counts for the statistics.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Das Spiel wird von all deinen Geräten entfernt und zählt nicht mehr für die Statistik."
+            "value": "Das Spiel wird entfernt und zählt nicht mehr für die Statistik."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La partida se elimina de todos tus dispositivos y deja de contar en las estadísticas."
+            "value": "La partida se elimina y deja de contar en las estadísticas."
           }
         }
       }
@@ -2421,34 +2245,34 @@
         }
       }
     },
-    "The unreadable file is kept on the device. You can bring your games back from iCloud or a backup file.": {
+    "The unreadable file is kept on the device. You can bring your games back by importing a backup file.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die unlesbare Datei bleibt auf dem Gerät. Deine Spiele kannst du aus iCloud oder einer Sicherungsdatei zurückholen."
+            "value": "Die unlesbare Datei bleibt auf dem Gerät. Deine Spiele kannst du zurückholen, indem du eine Sicherungsdatei importierst."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El archivo ilegible se conserva en el dispositivo. Puedes recuperar tus partidas desde iCloud o una copia."
+            "value": "El archivo ilegible se conserva en el dispositivo. Puedes recuperar tus partidas importando una copia de seguridad."
           }
         }
       }
     },
-    "The username identifies the player on all your devices.": {
+    "The username identifies the player when importing data from another device.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Am Benutzernamen erkennen alle deine Geräte den Spieler."
+            "value": "Am Benutzernamen wird der Spieler beim Importieren von einem anderen Gerät erkannt."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El nombre de usuario identifica al jugador en todos tus dispositivos."
+            "value": "El nombre de usuario identifica al jugador al importar datos de otro dispositivo."
           }
         }
       }
@@ -2529,6 +2353,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ese nombre de usuario ya existe."
+          }
+        }
+      }
+    },
+    "To bring another device up to date, export here and import the .pinguine file there, for example with AirDrop. Importing adds its games to yours and matches players by username. The file also works as a backup.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um ein anderes Gerät auf den neuesten Stand zu bringen, exportiere hier und importiere die .pinguine-Datei dort, zum Beispiel per AirDrop. Beim Importieren kommen ihre Spiele zu deinen dazu und Spieler werden über den Benutzernamen erkannt. Die Datei dient auch als Sicherung."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para poner al día otro dispositivo, exporta aquí e importa el archivo .pinguine allí, por ejemplo con AirDrop. Al importarlo, sus partidas se suman a las tuyas y los jugadores se reconocen por su nombre de usuario. El archivo también sirve como copia de seguridad."
           }
         }
       }
@@ -2667,22 +2507,6 @@
         }
       }
     },
-    "Up to date, last synced %@": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aktuell, zuletzt synchronisiert %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Al día, última sincronización %@"
-          }
-        }
-      }
-    },
     "Updated games: %lld": {
       "localizations": {
         "de": {
@@ -2727,22 +2551,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nombre de usuario"
-          }
-        }
-      }
-    },
-    "Waiting…": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Warte…"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esperando…"
           }
         }
       }
@@ -2851,38 +2659,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Puede que tu último cambio no se haya guardado. Inténtalo de nuevo o libera espacio."
-          }
-        }
-      }
-    },
-    "iCloud": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "iCloud"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "iCloud"
-          }
-        }
-      }
-    },
-    "iCloud sync isn't set up in this build yet.": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die iCloud-Synchronisierung ist in dieser Version noch nicht eingerichtet."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La sincronización con iCloud aún no está configurada en esta versión."
           }
         }
       }

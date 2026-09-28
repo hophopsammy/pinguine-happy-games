@@ -2,7 +2,6 @@ package com.pinguine.spiele.redux
 
 import com.pinguine.spiele.model.GameType
 import com.pinguine.spiele.persistence.SavedData
-import com.pinguine.spiele.sync.CloudWarning
 import com.pinguine.spiele.sync.ImportError
 
 /** Everything that can happen in the app. Swift creates these through [Actions]. */
@@ -53,7 +52,4 @@ sealed interface AppAction {
     data class ImportDumpFailed(val error: ImportError) : AppAction
     data class ConfirmImport(val timestamp: Long) : AppAction
     data object CancelImport : AppAction
-
-    // iCloud
-    data class CloudSnapshotsDecoded(val snapshots: List<SavedData>, val warning: CloudWarning?) : AppAction
 }

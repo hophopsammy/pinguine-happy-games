@@ -1,14 +1,11 @@
 package com.pinguine.spiele
 
 import com.pinguine.spiele.model.GameType
-import com.pinguine.spiele.sync.CloudSnapshotDecoder
-import com.pinguine.spiele.sync.CloudWarning
 import com.pinguine.spiele.sync.DecodeResult
 import com.pinguine.spiele.sync.DumpCodec
 import com.pinguine.spiele.sync.ImportError
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 class DumpCodecTest {
     private val sample = data(
@@ -51,30 +48,5 @@ class DumpCodecTest {
         assertEquals(ImportError.INCONSISTENT, failure(DumpCodec.encode(data(players = listOf(player("Anna"), player("Ben", aliases = setOf("anna")))))))
         val skyjoWithWizardRound = game("x", GameType.SKYJO, listOf("anna"), listOf(wizard(mapOf("anna" to 0))))
         assertEquals(ImportError.INCONSISTENT, failure(DumpCodec.encode(data(listOf(player("Anna")), listOf(skyjoWithWizardRound)))))
-    }
-}
-
-class CloudSnapshotDecoderTest {
-    private val valid = DumpCodec.encode(data(players = listOf(player("Anna"))))
-
-    @Test
-    fun readableSnapshotsDecodeWithoutWarning() {
-        val batch = CloudSnapshotDecoder.decode(listOf(valid, valid))
-        assertEquals(2, batch.snapshots.size)
-        assertNull(batch.warning)
-    }
-
-    @Test
-    fun unreadableSnapshotsAreSkippedWithAWarning() {
-        val batch = CloudSnapshotDecoder.decode(listOf(valid, "{broken"))
-        assertEquals(1, batch.snapshots.size)
-        assertEquals(CloudWarning.UNREADABLE_SNAPSHOT, batch.warning)
-    }
-
-    @Test
-    fun aNewerAppVersionOnAnotherDeviceIsReported() {
-        val batch = CloudSnapshotDecoder.decode(listOf("{broken", """{"schemaVersion":99}"""))
-        assertEquals(0, batch.snapshots.size)
-        assertEquals(CloudWarning.NEWER_SCHEMA_ON_OTHER_DEVICE, batch.warning)
     }
 }

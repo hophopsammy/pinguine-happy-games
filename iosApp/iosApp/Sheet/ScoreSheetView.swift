@@ -69,7 +69,7 @@ struct ScoreSheetView: View {
             switch kind {
             case .undo: Text("The last round's scores are removed.")
             case .end: Text("The current totals decide the winner.")
-            case .delete: Text("The game is removed from all your devices and doesn't count for the statistics.")
+            case .delete: Text("The game is removed and no longer counts for the statistics.")
             }
         }
     }

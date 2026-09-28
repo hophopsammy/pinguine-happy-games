@@ -7,7 +7,6 @@ import com.pinguine.spiele.persistence.SavedData
 import com.pinguine.spiele.redux.AppAction
 import com.pinguine.spiele.redux.AppState
 import com.pinguine.spiele.redux.EntryPhase
-import com.pinguine.spiele.redux.LoadStatus
 import com.pinguine.spiele.redux.UsernameIssue
 import com.pinguine.spiele.redux.appReducer
 import com.pinguine.spiele.redux.game
@@ -291,41 +290,25 @@ class RoundEntryReducerTest {
     }
 }
 
-class RevisionReducerTest {
+class ImportReducerTest {
     @Test
-    fun localChangesBumpTheRevisionButLoadingAndCloudMergesDont() {
-        val loaded = appReducer(AppState(), AppAction.DataLoaded(data(players = listOf(player("Anna")))))
-        assertEquals(LoadStatus.READY, loaded.loadStatus)
-        assertEquals(0, loaded.localRevision)
-        val added = loaded.reduce(AppAction.AddPlayer("Ben", 5, selectForNewGame = false))
-        assertEquals(1, added.localRevision)
-        val merged = added.reduce(AppAction.CloudSnapshotsDecoded(listOf(data(players = listOf(player("Carla")))), warning = null))
-        assertEquals(listOf("anna", "ben", "carla"), merged.players.map { it.id })
-        assertEquals(1, merged.localRevision)
-    }
-
-    @Test
-    fun aCloudMergeWithNothingNewReturnsTheSameState() {
-        val state = readyState(players = listOf(player("Anna")))
-        assertSame(state, state.reduce(AppAction.CloudSnapshotsDecoded(listOf(data(players = listOf(player("Anna")))), warning = null)))
-    }
-
-    @Test
-    fun cloudDataArrivingBeforeTheLocalFileIsMergedAfterLoading() {
-        val early = AppState().reduce(AppAction.CloudSnapshotsDecoded(listOf(data(players = listOf(player("Carla")))), warning = null))
-        assertTrue(early.players.isEmpty())
-        val loaded = early.reduce(AppAction.DataLoaded(data(players = listOf(player("Anna")))))
-        assertEquals(listOf("anna", "carla"), loaded.players.map { it.id })
-    }
-
-    @Test
-    fun importingADumpCountsAsALocalChange() {
+    fun confirmingAnImportMergesTheFile() {
         val state = readyState(players = listOf(player("Anna"))).reduce(
             AppAction.ImportDumpParsed(SavedData(players = listOf(player("Ben")))),
             AppAction.ConfirmImport(10),
         )
         assertEquals(listOf("anna", "ben"), state.players.map { it.id })
-        assertEquals(1, state.localRevision)
         assertNull(state.pendingImport)
+    }
+
+    @Test
+    fun importingKnownDataChangesNothing() {
+        val before = readyState(players = listOf(player("Anna")))
+        val after = before.reduce(
+            AppAction.ImportDumpParsed(data(players = listOf(player("Anna")))),
+            AppAction.ConfirmImport(10),
+        )
+        assertSame(before.players, after.players, "unchanged data is not saved again")
+        assertNull(after.pendingImport)
     }
 }

@@ -3,47 +3,10 @@ import SharedLogic
 
 struct SyncView: View {
     @Environment(AppModel.self) private var model
-    @Environment(CloudSyncService.self) private var cloud
     @State private var importing = false
 
     var body: some View {
-        @Bindable var cloud = cloud
         List {
-            Section {
-                Toggle(isOn: $cloud.isEnabled) {
-                    Label("Sync with iCloud", systemImage: "icloud")
-                }
-                .disabled(!cloud.isConfigured)
-                HStack {
-                    Label { Text(cloud.statusText) } icon: { Image(systemName: cloud.toolbarSymbol) }
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    if cloud.isSyncing { ProgressView() }
-                }
-                Button("Sync now") { cloud.syncNow() }
-                    .disabled(!cloud.canSyncNow)
-            } header: {
-                Text("iCloud")
-            } footer: {
-                Text("Keeps games, players and statistics up to date on every device signed in with your Apple ID.")
-            }
-
-            if let warning = model.state.cloudWarning {
-                Section {
-                    Label {
-                        switch warning {
-                        case .newerSchemaOnOtherDevice:
-                            Text("Another device uses a newer version of the app. Update the app on all devices to sync everything.")
-                        default:
-                            Text("Data from one of your devices couldn't be read.")
-                        }
-                    } icon: {
-                        Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.orange)
-                    }
-                    Button("OK") { model.dispatch(Actions.shared.dismissErrors()) }
-                }
-            }
-
             Section {
                 ShareLink(
                     item: BackupFile(store: model.store),
@@ -54,10 +17,8 @@ struct SyncView: View {
                 Button { importing = true } label: {
                     Label("Import data…", systemImage: "square.and.arrow.down")
                 }
-            } header: {
-                Text("Backup file")
             } footer: {
-                Text("Send a .pinguine file with AirDrop or save it to Files, for example to share games with someone else's device. Importing adds its games to yours; players are matched by username.")
+                Text("To bring another device up to date, export here and import the .pinguine file there, for example with AirDrop. Importing adds its games to yours and matches players by username. The file also works as a backup.")
             }
         }
         .navigationTitle("Sync")

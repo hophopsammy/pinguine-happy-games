@@ -80,7 +80,7 @@ internal fun persistenceMiddleware(
 }
 
 /** Decodes `.pinguine` dumps away from the main thread and feeds the result back as an action. */
-internal fun syncMiddleware(
+internal fun importMiddleware(
     scope: CoroutineScope,
     decodeDispatcher: CoroutineDispatcher,
 ): Middleware<AppState> = { store ->

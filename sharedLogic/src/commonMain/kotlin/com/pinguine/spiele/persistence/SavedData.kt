@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 /**
- * Everything the app stores. The same shape is used for the local file, the `.pinguine` dump and the
- * iCloud snapshot. Deleted games and players are remembered (with the deletion time) so they don't come
- * back when data from another device is merged.
+ * Everything the app stores. The same shape is used for the local file and the `.pinguine` dump. Deleted
+ * games and players are remembered (with the deletion time) so they don't come back when data from another
+ * device is merged.
  */
 @Serializable
 data class SavedData(

@@ -26,19 +26,13 @@ internal const val MAX_POINTS = 9999
 
 enum class UsernameIssue { EMPTY, TAKEN }
 
-internal fun appReducer(state: AppState, action: AppAction): AppState {
-    val next = reduce(state, action)
-    val isLocalChange = action !is AppAction.DataLoaded && action !is AppAction.CloudSnapshotsDecoded
-    return if (isLocalChange && !next.hasSameDataAs(state)) next.copy(localRevision = state.localRevision + 1) else next
-}
-
-private fun reduce(state: AppState, action: AppAction): AppState = when (action) {
+internal fun appReducer(state: AppState, action: AppAction): AppState = when (action) {
     AppAction.LoadRequested -> state.copy(loadStatus = LoadStatus.LOADING, loadError = null)
     is AppAction.DataLoaded -> dataLoaded(state, action.data)
     is AppAction.DataLoadFailed -> state.copy(loadStatus = LoadStatus.FAILED, loadError = action.message)
     is AppAction.StartFresh -> state.copy(loadStatus = LoadStatus.LOADING, loadError = null)
     is AppAction.PersistFailed -> state.copy(persistError = action.message)
-    AppAction.DismissErrors -> state.copy(persistError = null, importError = null, cloudWarning = null)
+    AppAction.DismissErrors -> state.copy(persistError = null, importError = null)
 
     is AppAction.AddPlayer -> addPlayer(state, action)
     is AppAction.RenamePlayer -> renamePlayer(state, action)
@@ -71,10 +65,8 @@ private fun reduce(state: AppState, action: AppAction): AppState = when (action)
     is AppAction.ImportDumpSelected -> state.copy(pendingImport = null, importError = null)
     is AppAction.ImportDumpParsed -> state.copy(pendingImport = action.data, importError = null)
     is AppAction.ImportDumpFailed -> state.copy(pendingImport = null, importError = action.error)
-    is AppAction.ConfirmImport -> state.pendingImport?.let { state.mergedWith(listOf(it)).copy(pendingImport = null) } ?: state
+    is AppAction.ConfirmImport -> state.pendingImport?.let { state.mergedWith(it).copy(pendingImport = null) } ?: state
     AppAction.CancelImport -> state.copy(pendingImport = null)
-
-    is AppAction.CloudSnapshotsDecoded -> cloudSnapshotsDecoded(state, action)
 }
 
 // region Loading and merging
@@ -83,22 +75,11 @@ private fun dataLoaded(state: AppState, data: SavedData): AppState {
     val loaded = state
         .withData(data.copy(players = data.players.inCanonicalOrder(), games = data.games.inCanonicalOrder()))
         .copy(loadStatus = LoadStatus.READY, loadError = null)
-    if (state.pendingCloudSnapshots.isEmpty()) return loaded.withSanitizedDrafts()
-    return loaded.copy(pendingCloudSnapshots = emptyList()).mergedWith(state.pendingCloudSnapshots)
+    return loaded.withSanitizedDrafts()
 }
 
-private fun cloudSnapshotsDecoded(state: AppState, action: AppAction.CloudSnapshotsDecoded): AppState {
-    val withWarning = if (action.warning != null) state.copy(cloudWarning = action.warning) else state
-    if (action.snapshots.isEmpty()) return withWarning
-    // Data from iCloud may arrive before the local file has been read; merge it once it has.
-    if (state.loadStatus != LoadStatus.READY) {
-        return withWarning.copy(pendingCloudSnapshots = withWarning.pendingCloudSnapshots + action.snapshots)
-    }
-    return withWarning.mergedWith(action.snapshots)
-}
-
-internal fun AppState.mergedWith(snapshots: List<SavedData>): AppState {
-    val merged = snapshots.fold(toSavedData()) { current, incoming -> DataMerger.merge(current, incoming).data }
+internal fun AppState.mergedWith(incoming: SavedData): AppState {
+    val merged = DataMerger.merge(toSavedData(), incoming).data
     val result = withData(merged.copy(exportedAt = null))
     return if (result === this) this else result.withSanitizedDrafts()
 }

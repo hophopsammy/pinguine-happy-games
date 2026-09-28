@@ -21,12 +21,6 @@
 	</array>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<false/>
-	<key>PinguineCloudKitContainer</key>
-	<string>$(CLOUDKIT_CONTAINER_ID)</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

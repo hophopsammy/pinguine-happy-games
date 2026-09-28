@@ -1,7 +1,6 @@
 package com.pinguine.spiele.redux
 
 import com.pinguine.spiele.model.GameType
-import com.pinguine.spiele.sync.CloudSnapshotBatch
 
 /**
  * Action creators for Swift (`Actions.shared.addPlayer(name:)`). They stamp ids and timestamps so the
@@ -48,8 +47,4 @@ object Actions {
     fun importDump(json: String): AppAction = AppAction.ImportDumpSelected(json)
     fun confirmImport(): AppAction = AppAction.ConfirmImport(currentTimeMillis())
     fun cancelImport(): AppAction = AppAction.CancelImport
-
-    /** Merges snapshots read with `CloudSnapshotDecoder`; the merge is done when dispatch returns. */
-    fun applyCloudSnapshots(batch: CloudSnapshotBatch): AppAction =
-        AppAction.CloudSnapshotsDecoded(batch.snapshots, batch.warning)
 }

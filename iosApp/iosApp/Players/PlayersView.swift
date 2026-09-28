@@ -128,7 +128,7 @@ struct PlayerEditorSheet: View {
                 } footer: {
                     switch issue {
                     case .taken: Text("This username is already taken.").foregroundStyle(.red)
-                    default: Text("The username identifies the player on all your devices.")
+                    default: Text("The username identifies the player when importing data from another device.")
                     }
                 }
             }
@@ -210,7 +210,7 @@ private struct MergePlayerSheet: View {
                     dismiss()
                 }
             } message: { target in
-                Text("All games of \(source.name) will belong to \(target.name). This also applies on your other devices.")
+                Text("All games of \(source.name) will belong to \(target.name).")
             }
         }
     }

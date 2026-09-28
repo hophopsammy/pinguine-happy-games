@@ -5,8 +5,3 @@ PRODUCT_BUNDLE_IDENTIFIER=com.pinguine.spiele.PinguineSpiele
 
 CURRENT_PROJECT_VERSION=1
 MARKETING_VERSION=1.0
-
-// iCloud sync: the app's CloudKit container. Leave empty to build without iCloud
-// (then also drop CODE_SIGN_ENTITLEMENTS, which grants the iCloud and push capabilities).
-CLOUDKIT_CONTAINER_ID=iCloud.com.pinguine.spiele
-CODE_SIGN_ENTITLEMENTS=Configuration/iosApp.entitlements
