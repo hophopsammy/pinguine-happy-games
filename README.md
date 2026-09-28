@@ -14,6 +14,7 @@ It is a Kotlin Multiplatform project with iOS as the only target. The UI is Swif
 * [/iosApp](./iosApp/iosApp) holds the SwiftUI screens:
   * `CloudSyncService`: the CloudKit/`CKSyncEngine` side of iCloud sync.
   * `Localizable.xcstrings`: all UI text in English, German and Spanish.
+* [/design/app-icon](./design/app-icon) holds the app icon as SVG, in light, dark and tinted versions. `render.sh` renders them into the asset catalog.
 
 ## Running
 

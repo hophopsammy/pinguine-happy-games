@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9ADCFF"/>
+      <stop offset="1" stop-color="#2F8FE3"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="512" cy="500" r="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="head" cx="400" cy="320" r="640" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4A5677"/>
+      <stop offset="0.45" stop-color="#252C40"/>
+      <stop offset="1" stop-color="#10141F"/>
+    </radialGradient>
+    <radialGradient id="face" cx="512" cy="610" r="330" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.72" stop-color="#F5F8FC"/>
+      <stop offset="1" stop-color="#D3DEEC"/>
+    </radialGradient>
+    <linearGradient id="eye" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0C1018"/>
+      <stop offset="0.6" stop-color="#1A2030"/>
+      <stop offset="1" stop-color="#3B4868"/>
+    </linearGradient>
+    <linearGradient id="beak" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFC94D"/>
+      <stop offset="1" stop-color="#FF8419"/>
+    </linearGradient>
+    <radialGradient id="cheek" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FF7A9C"/>
+      <stop offset="1" stop-color="#FF7A9C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lowerFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <mask id="lower" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024">
+      <rect width="1024" height="1024" fill="url(#lowerFade)"/>
+    </mask>
+    <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="blur14" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="blur24" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+    <clipPath id="headClip">
+      <path d="M 512 215 C 745 215 862 375 862 565 C 862 755 712 858 512 858 C 312 858 162 755 162 565 C 162 375 279 215 512 215 Z"/>
+    </clipPath>
+    <clipPath id="faceClip">
+      <path d="M 512 452 C 482 400 428 382 372 390 C 282 402 222 480 222 580 C 222 718 350 812 512 812 C 674 812 802 718 802 580 C 802 480 742 402 652 390 C 596 382 542 400 512 452 Z"/>
+    </clipPath>
+  </defs>
+  <g>
+    <rect width="1024" height="1024" fill="url(#bg)"/>
+    <rect width="1024" height="1024" fill="url(#glow)"/>
+    <circle cx="132" cy="150" r="9" fill="#fff" opacity="0.75"/>
+    <circle cx="236" cy="96" r="5" fill="#fff" opacity="0.75"/>
+    <circle cx="880" cy="120" r="7" fill="#fff" opacity="0.75"/>
+    <circle cx="930" cy="262" r="5" fill="#fff" opacity="0.75"/>
+    <circle cx="96" cy="330" r="5" fill="#fff" opacity="0.75"/>
+    <circle cx="842" cy="360" r="4" fill="#fff" opacity="0.75"/>
+    <circle cx="182" cy="470" r="4" fill="#fff" opacity="0.75"/>
+    <circle cx="948" cy="520" r="6" fill="#fff" opacity="0.75"/>
+    <circle cx="70" cy="640" r="7" fill="#fff" opacity="0.75"/>
+    <circle cx="900" cy="700" r="4" fill="#fff" opacity="0.75"/>
+    <g transform="translate(512 530) scale(0.94) translate(-512 -512)">
+      <g transform="rotate(-24 512 860)">
+        <rect x="402" y="80" width="220" height="320" rx="30" fill="#2185D3" stroke="#fff" stroke-width="14"/>
+        <rect x="434" y="112" width="156" height="256" rx="18" fill="none" stroke="#fff" stroke-width="6" opacity="0.45"/>
+      </g>
+      <g transform="rotate(24 512 860)">
+        <rect x="402" y="80" width="220" height="320" rx="30" fill="#6645B3" stroke="#fff" stroke-width="14"/>
+        <rect x="434" y="112" width="156" height="256" rx="18" fill="none" stroke="#fff" stroke-width="6" opacity="0.45"/>
+      </g>
+      <g transform="rotate(0 512 860)">
+        <rect x="402" y="80" width="220" height="320" rx="30" fill="#9E6330" stroke="#fff" stroke-width="14"/>
+        <rect x="434" y="112" width="156" height="256" rx="18" fill="none" stroke="#fff" stroke-width="6" opacity="0.45"/>
+      </g>
+      <ellipse cx="512" cy="872" rx="280" ry="30" fill="#0A3A6B" opacity="0.25" filter="url(#blur14)"/>
+      <path d="M 512 215 C 745 215 862 375 862 565 C 862 755 712 858 512 858 C 312 858 162 755 162 565 C 162 375 279 215 512 215 Z" fill="url(#head)"/>
+      <g clip-path="url(#headClip)">
+        <ellipse cx="380" cy="300" rx="130" ry="60" transform="rotate(-28 380 300)" fill="#fff" opacity="0.14" filter="url(#blur24)"/>
+        <path d="M 512 215 C 745 215 862 375 862 565 C 862 755 712 858 512 858 C 312 858 162 755 162 565 C 162 375 279 215 512 215 Z" fill="none" stroke="#8CC8FF" stroke-width="40" opacity="0.45" filter="url(#blur14)" mask="url(#lower)"/>
+      </g>
+      <path d="M 512 452 C 482 400 428 382 372 390 C 282 402 222 480 222 580 C 222 718 350 812 512 812 C 674 812 802 718 802 580 C 802 480 742 402 652 390 C 596 382 542 400 512 452 Z" fill="url(#face)"/>
+      <g clip-path="url(#faceClip)">
+        <path d="M 512 452 C 482 400 428 382 372 390 C 282 402 222 480 222 580 C 222 718 350 812 512 812 C 674 812 802 718 802 580 C 802 480 742 402 652 390 C 596 382 542 400 512 452 Z" fill="none" stroke="#8FA2BF" stroke-width="30" transform="translate(0 -16)" opacity="0.45" filter="url(#blur14)"/>
+        <ellipse cx="512" cy="716" rx="62" ry="14" fill="#8FA3C0" opacity="0.35" filter="url(#blur8)"/>
+      </g>
+      <ellipse cx="404" cy="568" rx="50" ry="60" fill="url(#eye)"/>
+      <circle cx="420" cy="545" r="18" fill="#fff"/>
+      <circle cx="388" cy="593" r="8" fill="#fff" opacity="0.85"/>
+      <ellipse cx="620" cy="568" rx="50" ry="60" fill="url(#eye)"/>
+      <circle cx="636" cy="545" r="18" fill="#fff"/>
+      <circle cx="604" cy="593" r="8" fill="#fff" opacity="0.85"/>
+      <ellipse cx="298" cy="676" rx="56" ry="33" fill="url(#cheek)" opacity="0.75"/>
+      <ellipse cx="726" cy="676" rx="56" ry="33" fill="url(#cheek)" opacity="0.75"/>
+      <path d="M 512 626 C 556 626 590 636 590 656 C 590 684 548 714 512 716 C 476 714 434 684 434 656 C 434 636 468 626 512 626 Z" fill="url(#beak)"/>
+      <path d="M 464 670 Q 512 688 560 670" fill="none" stroke="#D9660A" stroke-width="5" stroke-linecap="round" opacity="0.55"/>
+      <ellipse cx="492" cy="642" rx="26" ry="9" fill="#fff" opacity="0.5"/>
+    </g>
+  </g>
+</svg>
