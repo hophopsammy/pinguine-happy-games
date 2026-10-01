@@ -31,6 +31,7 @@ struct NewGameView: View {
                         .foregroundStyle(.white)
                         .frame(width: 52, height: 52)
                         .background(type.gradient, in: RoundedRectangle(cornerRadius: 12))
+                        .accessibilityHidden(true)
                     Text(type.rules)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -44,6 +45,7 @@ struct NewGameView: View {
                             Image(systemName: choice.isSelected ? "checkmark.circle.fill" : "circle")
                                 .foregroundStyle(choice.isSelected ? type.tint : .secondary)
                                 .font(.title3)
+                                .accessibilityHidden(true)
                             Text(choice.name)
                                 .foregroundStyle(.primary)
                             Spacer()
@@ -53,10 +55,12 @@ struct NewGameView: View {
                                     .foregroundStyle(.secondary)
                             }
                         }
+                        .accessibilityElement(children: .combine)
                     }
                     .buttonStyle(.plain)
                     .contentShape(Rectangle())
                     .disabled(!choice.canSelect)
+                    .accessibilityAddTraits(choice.isSelected ? .isSelected : [])
                 }
                 HStack {
                     TextField("New player", text: $newPlayer)

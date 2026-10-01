@@ -58,6 +58,8 @@ struct StatisticsView: View {
                     .chartXAxis(.hidden)
                     .frame(height: CGFloat(stats.leaderboard.count) * 34 + 16)
                     .padding(.vertical, 8)
+                    // Same numbers as the Leaderboard section below, in an accessible list form.
+                    .accessibilityHidden(true)
                 }
 
                 Section("Leaderboard") {
@@ -77,6 +79,7 @@ struct StatisticsView: View {
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                 }
+                                .accessibilityElement(children: .combine)
                             }
                         }
                     } header: {
@@ -114,6 +117,7 @@ struct HistoryView: View {
                             .foregroundStyle(row.type.tint)
                             .font(.title2)
                             .frame(width: 36)
+                            .accessibilityHidden(true)
                         VStack(alignment: .leading, spacing: 2) {
                             HStack {
                                 Text(row.type.title).font(.headline)
@@ -130,6 +134,7 @@ struct HistoryView: View {
                                 .lineLimit(1)
                         }
                     }
+                    .accessibilityElement(children: .combine)
                 }
                 .swipeActions {
                     Button("Delete", systemImage: "trash", role: .destructive) { gameToDelete = row }

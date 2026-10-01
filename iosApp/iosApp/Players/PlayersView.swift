@@ -55,12 +55,13 @@ struct PlayersView: View {
             Text(row.name).font(.headline)
             HStack(spacing: 4) {
                 Text("\(row.gamesPlayed.int) games")
-                Text(verbatim: "·")
+                Text(verbatim: "·").accessibilityHidden(true)
                 Text("\(row.wins.int) wins")
             }
             .font(.caption)
             .foregroundStyle(.secondary)
         }
+        .accessibilityElement(children: .combine)
         .swipeActions(edge: .trailing) {
             if row.canDelete {
                 Button("Delete", systemImage: "trash", role: .destructive) {

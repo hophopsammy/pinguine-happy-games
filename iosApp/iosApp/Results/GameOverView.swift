@@ -25,6 +25,7 @@ struct GameOverView: View {
                         .font(.system(size: 56))
                         .foregroundStyle(.yellow.gradient)
                         .symbolEffect(.bounce, value: winners)
+                        .accessibilityHidden(true)
                     if winners.count > 1 {
                         Text("\(joined(winners)) share the win!")
                             .font(.title2.weight(.bold))
@@ -41,6 +42,7 @@ struct GameOverView: View {
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical)
+                .accessibilityElement(children: .combine)
             }
 
             Section("Final standings") {
@@ -55,6 +57,7 @@ struct GameOverView: View {
                         Text(verbatim: "\(column.total)")
                             .font(.headline.monospacedDigit())
                     }
+                    .accessibilityElement(children: .combine)
                 }
             }
 

@@ -84,6 +84,7 @@ private struct GameTileView: View {
                 .font(.title)
                 .frame(width: 52, height: 52)
                 .background(.white.opacity(0.18), in: RoundedRectangle(cornerRadius: 12))
+                .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 4) {
                 Text(tile.type.title)
                     .font(.title2.weight(.bold))
@@ -99,9 +100,11 @@ private struct GameTileView: View {
             Image(systemName: "chevron.right")
                 .font(.headline)
                 .opacity(0.7)
+                .accessibilityHidden(true)
         }
         .foregroundStyle(.white)
         .padding(.vertical, 8)
+        .accessibilityElement(children: .combine)
     }
 }
 
@@ -114,6 +117,7 @@ struct RunningGameRow: View {
                 .foregroundStyle(game.type.tint)
                 .font(.title2)
                 .frame(width: 36)
+                .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
                 Text(game.type.title)
                     .font(.headline)
@@ -126,6 +130,7 @@ struct RunningGameRow: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .accessibilityElement(children: .combine)
     }
 
     private var progress: String {
@@ -153,7 +158,7 @@ struct LeaderboardRowView: View {
                 Text(row.name).font(.headline)
                 HStack(spacing: 4) {
                     Text("\(row.played.int) games")
-                    Text(verbatim: "·")
+                    Text(verbatim: "·").accessibilityHidden(true)
                     Text("\((Double(row.winRatePercent) / 100).formatted(.percent)) won")
                 }
                 .font(.caption)
@@ -164,6 +169,7 @@ struct LeaderboardRowView: View {
                 .font(.subheadline.weight(.semibold))
                 .monospacedDigit()
         }
+        .accessibilityElement(children: .combine)
     }
 
     private var medal: Color {
