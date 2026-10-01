@@ -23,6 +23,9 @@ internal object DumpCodec {
     fun encode(data: SavedData): String = AppJson.encodeToString(SavedData.serializer(), data)
 
     fun decode(json: String): DecodeResult {
+        // A deeply nested payload can overflow the parser's call stack (a native crash, not a
+        // catchable exception) before it ever gets a chance to reject the content as malformed.
+        if (exceedsMaxNestingDepth(json)) return DecodeResult.Failure(ImportError.MALFORMED)
         val element = try {
             AppJson.parseToJsonElement(json)
         } catch (e: SerializationException) {
@@ -70,5 +73,31 @@ internal object DumpCodec {
             }
         }
         return true
+    }
+
+    // The real schema nests about 6 levels deep (object > games > game > rounds > round > points).
+    // 64 leaves generous headroom while staying far below depths that crash the parser.
+    private const val MAX_NESTING_DEPTH = 64
+
+    private fun exceedsMaxNestingDepth(json: String, limit: Int = MAX_NESTING_DEPTH): Boolean {
+        var depth = 0
+        var inString = false
+        var escaped = false
+        for (ch in json) {
+            if (inString) {
+                when {
+                    escaped -> escaped = false
+                    ch == '\\' -> escaped = true
+                    ch == '"' -> inString = false
+                }
+                continue
+            }
+            when (ch) {
+                '"' -> inString = true
+                '{', '[' -> { depth++; if (depth > limit) return true }
+                '}', ']' -> depth--
+            }
+        }
+        return false
     }
 }

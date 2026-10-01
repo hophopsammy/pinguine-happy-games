@@ -131,6 +131,22 @@ class MiddlewareTest {
     }
 
     @Test
+    fun failedImportLeavesExistingDataOnDiskAndInMemoryUntouched() = runTest {
+        val repository = InMemoryGameRepository(data(players = listOf(player("Anna"))))
+        val store = store(repository)
+        advanceUntilIdle()
+        val saves = repository.saveCount
+
+        store.dispatch(Actions.importDump("{broken"))
+        advanceUntilIdle()
+
+        assertEquals(ImportError.MALFORMED, store.state.importError)
+        assertEquals(listOf("anna"), store.state.players.map { it.id })
+        assertEquals(saves, repository.saveCount, "a failed import must not trigger a save")
+        assertEquals(listOf("anna"), repository.data!!.players.map { it.id })
+    }
+
+    @Test
     fun observersOnlyHearAboutRealChanges() = runTest {
         val store = store(InMemoryGameRepository())
         advanceUntilIdle()

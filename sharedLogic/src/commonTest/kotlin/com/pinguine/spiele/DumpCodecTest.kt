@@ -42,6 +42,19 @@ class DumpCodecTest {
     }
 
     @Test
+    fun nonNumericSchemaVersionIsRejectedRatherThanCrashing() {
+        assertEquals(ImportError.MALFORMED, failure("""{"schemaVersion":{},"players":[]}"""))
+        assertEquals(ImportError.MALFORMED, failure("""{"schemaVersion":[1],"players":[]}"""))
+    }
+
+    @Test
+    fun deeplyNestedInputIsRejectedRatherThanCrashing() {
+        val depth = 1_000
+        val json = "{\"players\":" + "[".repeat(depth) + "]".repeat(depth) + "}"
+        assertEquals(ImportError.MALFORMED, failure(json))
+    }
+
+    @Test
     fun inconsistentDataIsRejected() {
         assertEquals(ImportError.INCONSISTENT, failure(DumpCodec.encode(sample.copy(players = sample.players.take(1)))))
         assertEquals(ImportError.INCONSISTENT, failure(DumpCodec.encode(sample.copy(players = listOf(player("Anna").copy(id = "Anna"))))))

@@ -11,6 +11,7 @@ import com.pinguine.spiele.redux.UsernameIssue
 import com.pinguine.spiele.redux.appReducer
 import com.pinguine.spiele.redux.game
 import com.pinguine.spiele.redux.usernameIssue
+import com.pinguine.spiele.sync.ImportError
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -310,5 +311,25 @@ class ImportReducerTest {
         )
         assertSame(before.players, after.players, "unchanged data is not saved again")
         assertNull(after.pendingImport)
+    }
+
+    @Test
+    fun aFailedImportLeavesExistingDataUntouched() {
+        val before = readyState(players = listOf(player("Anna")), games = listOf(game("g", GameType.SKYJO, listOf("anna"))))
+        val after = before.reduce(AppAction.ImportDumpFailed(ImportError.MALFORMED))
+        assertSame(before.players, after.players)
+        assertSame(before.games, after.games)
+        assertSame(before.deletedGames, after.deletedGames)
+        assertSame(before.deletedPlayers, after.deletedPlayers)
+        assertEquals(ImportError.MALFORMED, after.importError)
+        assertNull(after.pendingImport)
+    }
+
+    @Test
+    fun aStalePreviewIsClearedWhenANewFileIsPickedEvenBeforeItFailsToDecode() {
+        val parsed = readyState().reduce(AppAction.ImportDumpParsed(data(players = listOf(player("Ben")))))
+        assertNotNull(parsed.pendingImport)
+        val afterPickingAnotherFile = parsed.reduce(AppAction.ImportDumpSelected(json = "irrelevant, still decoding"))
+        assertNull(afterPickingAnotherFile.pendingImport, "the stale preview must not be confirmable once a new file is picked")
     }
 }
