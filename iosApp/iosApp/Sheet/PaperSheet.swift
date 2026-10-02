@@ -29,7 +29,6 @@ struct PaperSheet: View {
                 }
                 totals
             }
-            .overlay { if sheet.type == .skyjo { SkyjoWatermark() } }
             .padding(style.framePadding)
             .background(style.frame)
             if sheet.type == .wizard { WizardFooter() }
@@ -330,17 +329,6 @@ struct PadStyle {
         case .wizard: row.isMultiple(of: 2) ? paper : shade.opacity(0.8)
         default: paper
         }
-    }
-}
-
-private struct SkyjoWatermark: View {
-    var body: some View {
-        Text(verbatim: "SKYJO")
-            .font(.system(size: 88, weight: .black, design: .serif))
-            .foregroundStyle(.gray.opacity(0.13))
-            .rotationEffect(.degrees(-28))
-            .allowsHitTesting(false)
-            .accessibilityHidden(true)
     }
 }
 
