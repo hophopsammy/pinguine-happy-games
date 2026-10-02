@@ -37,6 +37,7 @@ struct StatisticsView: View {
                                 Label(count.type.title, systemImage: count.type.symbol)
                                     .foregroundStyle(count.type.tint)
                             }
+                            .accessibilityElement(children: .combine)
                         }
                     }
                     LabeledContent("Games played") {

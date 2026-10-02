@@ -65,6 +65,8 @@ struct PaperSheet: View {
                 .frame(width: columnWidth, height: style.headerHeight)
                 .background(style.headerBackground(column: index))
                 .overlay(gridLine)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(spokenHeader(column))
             }
         }
         .foregroundStyle(style.ink)
@@ -93,7 +95,6 @@ struct PaperSheet: View {
                                 .font(.system(size: 8))
                                 .foregroundStyle(style.ink.opacity(0.6))
                                 .padding(3)
-                                .accessibilityLabel("Dealer")
                         }
                     }
                     .overlay(gridLine)
@@ -102,8 +103,10 @@ struct PaperSheet: View {
         .foregroundStyle(style.ink)
         .contentShape(Rectangle())
         .onTapGesture { onTapRow(row) }
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(spokenLabel(for: row))
         .accessibilityAddTraits(row.canEdit || row.state == .next ? .isButton : [])
+        .accessibilityHidden(row.state == .planned)
     }
 
     private var totals: some View {
@@ -128,7 +131,6 @@ struct PaperSheet: View {
                             Ellipse()
                                 .stroke(style.ink, lineWidth: 1.5)
                                 .padding(-5)
-                                .accessibilityLabel("Winner")
                         }
                     }
                     .frame(width: columnWidth, height: style.rowHeight + 8)
@@ -136,6 +138,9 @@ struct PaperSheet: View {
                     .overlay(gridLine)
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(sheet.type == .biberbande ? String(localized: "Final") : String(localized: "Total"))
+        .accessibilityValue(spokenTotals)
     }
 
     // MARK: Cells
@@ -199,7 +204,56 @@ struct PaperSheet: View {
                     }
                 }
         }
-        .accessibilityElement(children: .combine)
+    }
+
+    // MARK: VoiceOver
+
+    private func spokenHeader(_ column: SheetColumn) -> String {
+        if column.isWinner { return "\(column.name), \(String(localized: "Winner"))" }
+        if column.isLeader { return "\(column.name), \(String(localized: "Leading"))" }
+        return column.name
+    }
+
+    /// One sentence per round with every player's name, since the pad conveys that by column position.
+    private func spokenLabel(for row: SheetRow) -> String {
+        var parts = [String(localized: "Round \(row.roundNumber.int)")]
+        for (index, (column, cell)) in zip(sheet.columns, row.cells).enumerated() {
+            let isDealer = row.dealerSeat.int == index && (row.state == .next || row.state == .bidsPlaced)
+            if let text = spokenCell(cell, name: column.name, isDealer: isDealer) { parts.append(text) }
+        }
+        return parts.joined(separator: ". ")
+    }
+
+    private func spokenCell(_ cell: SheetCell, name: String, isDealer: Bool) -> String? {
+        var facts: [String] = []
+        switch sheet.type {
+        case .skyjo:
+            if cell.hasScore {
+                facts += ["\(cell.runningTotal)", signed(cell.roundScore)]
+                if cell.isRoundEnder { facts.append(String(localized: "Ended the round")) }
+                if cell.isDoubled { facts.append(String(localized: "Points doubled")) }
+            }
+        case .wizard:
+            if cell.hasScore { facts.append("\(cell.runningTotal)") }
+            if cell.hasBid {
+                let bid = cell.bid.int
+                if !cell.hasScore {
+                    facts.append(String(localized: "Bid \(bid)"))
+                } else {
+                    facts.append(cell.madeBid ? String(localized: "Bid \(bid) made") : String(localized: "Bid \(bid) missed"))
+                }
+            }
+        default:
+            if cell.hasScore { facts.append("\(cell.roundScore)") }
+        }
+        if isDealer { facts.append(String(localized: "Dealer")) }
+        return facts.isEmpty ? nil : "\(name): " + facts.joined(separator: ", ")
+    }
+
+    private var spokenTotals: String {
+        sheet.columns.map { column in
+            column.isWinner ? "\(column.name) \(column.total), \(String(localized: "Winner"))" : "\(column.name) \(column.total)"
+        }.joined(separator: ". ")
     }
 
     // MARK: Helpers

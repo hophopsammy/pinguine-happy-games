@@ -34,7 +34,8 @@ struct GameOverView: View {
                             .font(.title2.weight(.bold))
                     }
                     HStack(spacing: 4) {
-                        Text(verbatim: "\(sheet.type.title) ·")
+                        Text(verbatim: sheet.type.title)
+                        Text(verbatim: "·").accessibilityHidden(true)
                         Text("\(sheet.completedRounds.int) rounds")
                     }
                     .foregroundStyle(.secondary)

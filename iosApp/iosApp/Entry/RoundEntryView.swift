@@ -86,6 +86,7 @@ struct RoundEntryView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
+                    .accessibilityElement(children: .combine)
                     Spacer()
                     if entry.type == .skyjo {
                         Button {
@@ -95,7 +96,7 @@ struct RoundEntryView: View {
                                 .foregroundStyle(row.isRoundEnder ? entry.type.tint : .secondary)
                         }
                         .buttonStyle(.borderless)
-                        .accessibilityLabel(row.isRoundEnder ? "Ended the round" : "Mark as the player who ended the round")
+                        .accessibilityLabel(row.isRoundEnder ? "\(row.name) ended the round" : "Mark \(row.name) as the player who ended the round")
                     }
                     if row.isDoubled {
                         Text("×2 = \(row.previewScore.int)")
@@ -104,13 +105,14 @@ struct RoundEntryView: View {
                     }
                     Button { flipSign(row) } label: { Text(verbatim: "±").font(.title3) }
                         .buttonStyle(.borderless)
-                        .accessibilityLabel("Change sign")
+                        .accessibilityLabel("Change sign for \(row.name)")
                     TextField("0", text: pointsBinding(row))
                         .keyboardType(.numbersAndPunctuation)
                         .multilineTextAlignment(.trailing)
                         .font(.title3.monospacedDigit())
                         .frame(width: 72)
                         .textFieldStyle(.roundedBorder)
+                        .accessibilityLabel("Points for \(row.name)")
                         .focused($focusedPlayer, equals: row.playerId)
                         .submitLabel(.next)
                         .onSubmit { focusNext(after: row.playerId, in: entry) }

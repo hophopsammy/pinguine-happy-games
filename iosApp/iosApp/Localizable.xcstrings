@@ -23,6 +23,22 @@
         }
       }
     },
+    "%@ ended the round": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ hat die Runde beendet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ terminó la ronda"
+          }
+        }
+      }
+    },
     "%@ is now called %@": {
       "localizations": {
         "de": {
@@ -631,6 +647,54 @@
         }
       }
     },
+    "Bid %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ansage %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apuesta %lld"
+          }
+        }
+      }
+    },
+    "Bid %lld made": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ansage %lld erfüllt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apuesta %lld acertada"
+          }
+        }
+      }
+    },
+    "Bid %lld missed": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ansage %lld verfehlt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apuesta %lld fallada"
+          }
+        }
+      }
+    },
     "Bids first": {
       "localizations": {
         "de": {
@@ -745,18 +809,18 @@
         }
       }
     },
-    "Change sign": {
+    "Change sign for %@": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vorzeichen wechseln"
+            "value": "Vorzeichen für %@ wechseln"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cambiar signo"
+            "value": "Cambiar el signo de %@"
           }
         }
       }
@@ -1321,6 +1385,22 @@
         }
       }
     },
+    "Leading": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorne"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En cabeza"
+          }
+        }
+      }
+    },
     "Lowest total wins. One round per player.": {
       "localizations": {
         "de": {
@@ -1353,18 +1433,18 @@
         }
       }
     },
-    "Mark as the player who ended the round": {
+    "Mark %@ as the player who ended the round": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Als Spieler markieren, der die Runde beendet hat"
+            "value": "%@ als Spieler markieren, der die Runde beendet hat"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Marcar como quien terminó la ronda"
+            "value": "Marcar a %@ como quien terminó la ronda"
           }
         }
       }
@@ -1781,6 +1861,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jugadores:"
+          }
+        }
+      }
+    },
+    "Points doubled": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punkte verdoppelt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos duplicados"
+          }
+        }
+      }
+    },
+    "Points for %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punkte für %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos de %@"
           }
         }
       }
@@ -2369,6 +2481,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Para poner al día otro dispositivo, exporta aquí e importa el archivo .pinguine allí, por ejemplo con AirDrop. Al importarlo, sus partidas se suman a las tuyas y los jugadores se reconocen por su nombre de usuario. El archivo también sirve como copia de seguridad."
+          }
+        }
+      }
+    },
+    "Total": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesamt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
           }
         }
       }
